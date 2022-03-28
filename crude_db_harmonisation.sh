@@ -29,8 +29,10 @@ rgi main -i dbs/ncbi_amr.faa -o mapping/ncbi_rgi -t protein -a BLAST --clean
 python reconcile.py -f dbs/resfinder.fna -r mapping/resfinder_rgi.txt -d resfinder
 python reconcile.py -f dbs/ncbi_amr.faa -r mapping/ncbi_rgi.txt -d ncbi
 
+# tidy up
+mv resfinder_ARO_mapping.tsv ncbi_ARO_mapping.tsv mapping
+
 # combine outputs
 awk -F $'\t' 'NR == 1 || FNR > 1'  mapping/resfinder_ARO_mapping.tsv mapping/ncbi_ARO_mapping.tsv > resfinder_ncbi_ARO_mapping.tsv
 
-# tidy up
-mv resfinder_ARO_mapping.tsv ncbi_ARO_mapping.tsv mapping
+
