@@ -12,6 +12,11 @@ rm -rf resfinder_db
 wget https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/AMRProt
 mv AMRProt dbs/ncbi_amr.faa
 
+# get the SARG database
+wget -c https://smile.hku.hk/SARGs/static/images/Ublastx_stageone2.3.tar.gz
+tar zxvf Ublastx_stageone2.3.tar.gz
+cp Ublastx_stageone2.3/DB/SARG.2.2.fasta dbs/sarg.faa
+
 # get latest CARD database
 wget -O dbs/card.tar.bz2 https://card.mcmaster.ca/latest/data 
 tar -xvf dbs/card.tar.bz2 -C dbs
@@ -24,15 +29,18 @@ rgi load -i dbs/card.json
 mkdir -p mapping
 rgi main -i dbs/resfinder.fna -o mapping/resfinder_rgi -t contig -a BLAST --clean
 rgi main -i dbs/ncbi_amr.faa -o mapping/ncbi_rgi -t protein -a BLAST --clean
+rgi main -i dbs/sarg.faa -o mapping/sarg_rgi -t protein -a BLAST --clean
 
 # reconcile the databases
 python reconcile.py -f dbs/resfinder.fna -r mapping/resfinder_rgi.txt -d resfinder
 python reconcile.py -f dbs/ncbi_amr.faa -r mapping/ncbi_rgi.txt -d ncbi
+python reconcile.py -f dbs/sarg.faa -r mapping/sarg_rgi.txt -d sarg
+# Maybe post-process sarg output
 
 # tidy up
-mv resfinder_ARO_mapping.tsv ncbi_ARO_mapping.tsv mapping
+mv resfinder_ARO_mapping.tsv ncbi_ARO_mapping.tsv sarg_ARO_mapping.tsv mapping
 
 # combine outputs
-awk -F $'\t' 'NR == 1 || FNR > 1'  mapping/resfinder_ARO_mapping.tsv mapping/ncbi_ARO_mapping.tsv > resfinder_ncbi_ARO_mapping.tsv
+awk -F $'\t' 'NR == 1 || FNR > 1'  mapping/resfinder_ARO_mapping.tsv mapping/ncbi_ARO_mapping.tsv mapping/sarg_ARO_mapping.tsv > resfinder_ncbi_ARO_mapping.tsv
 
 
