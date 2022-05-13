@@ -22,7 +22,11 @@ tar zxf Ublastx_stageone2.3.tar.gz
 cp Ublastx_stageone2.3/DB/SARG.2.2.fasta dbs/sarg.faa
 
 # get DeepARG-DB
-wget -c http://bench.cs.vt.edu/ftp/argminer/release/ARGminer-v1.1.0.A.fasta -O dbs/deeparg.faa
+# Deprecated because of low mapping rate. 
+# wget -c http://bench.cs.vt.edu/ftp/argminer/release/ARGminer-v1.1.0.A.fasta -O dbs/deeparg.faa
+# Use this one instead
+git clone https://bitbucket.org/gusphdproj/deeparg-largerepo/
+cp deeparg-largerepo/database/v2/features.fasta dbs/deeparg.faa
 
 # get latest CARD database
 wget -O dbs/card.tar.bz2 https://card.mcmaster.ca/latest/data 
