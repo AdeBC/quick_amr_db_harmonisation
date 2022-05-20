@@ -33,8 +33,6 @@ deeparg         0.976
 ncbi            0.968
 resfinder       0.978
 resfinder_fg    0.983
-sarg            0.494
+sarg            0.978
 ```
-
-_Mapping result for **sarg** to be optimized_.
 
