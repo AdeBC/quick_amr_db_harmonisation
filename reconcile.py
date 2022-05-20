@@ -34,11 +34,11 @@ def get_aro_for_hits(fasta, rgi_output, database):
     elif database == 'ncbi':
         rgi_hits['Original ID'] = rgi_hits['ORF_ID']
     elif database == 'sarg':
-        rgi_hits['Original ID'] = rgi_hits['ORF_ID']
+        rgi_hits['Original ID'] = rgi_hits['ORF_ID'].apply(lambda x: x.split()[0])
     elif database == 'deeparg':
-        rgi_hits['Original ID'] = rgi_hits['ORF_ID']  # to be updated
+        rgi_hits['Original ID'] = rgi_hits['ORF_ID']
     elif database == 'resfinder_fg':
-        rgi_hits['Original ID'] = rgi_hits['ORF_ID']  # to be updated
+        rgi_hits['Original ID'] = rgi_hits['ORF_ID']
     # homolog models only for now
     rgi_hits = rgi_hits[rgi_hits['Model_type'] == "protein homolog model"]
 
