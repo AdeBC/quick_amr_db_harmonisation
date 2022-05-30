@@ -39,6 +39,10 @@ def get_aro_for_hits(fasta, rgi_output, database):
         rgi_hits['Original ID'] = rgi_hits['ORF_ID']
     elif database == 'resfinder_fg':
         rgi_hits['Original ID'] = rgi_hits['ORF_ID']
+    elif database == 'argannot':
+        rgi_hits['Original ID'] = rgi_hits['ORF_ID']
+    elif database == 'megares':
+        rgi_hits['Original ID'] = rgi_hits['ORF_ID']
     # homolog models only for now
     rgi_hits = rgi_hits[rgi_hits['Model_type'] == "protein homolog model"]
 
@@ -74,7 +78,7 @@ if __name__ == '__main__':
 						help="Corresponding rgi output tsv for the fasta file")
     parser.add_argument("-d", "--database", required=True, type=str,
 						help="Name of the database", 
-                        choices=['resfinder', 'ncbi', 'sarg', 'deeparg', 'resfinder_fg'])
+                        choices=['resfinder', 'ncbi', 'sarg', 'deeparg', 'resfinder_fg', 'megares', 'argannot'])
 
 
     args = parser.parse_args()
