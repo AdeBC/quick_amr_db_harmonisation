@@ -40,12 +40,11 @@ def get_aro_for_hits(fasta, rgi_output, database):
     elif database == 'resfinder_fg':
         rgi_hits['Original ID'] = rgi_hits['ORF_ID']
     elif database == 'argannot':
-        rgi_hits['Original ID'] = rgi_hits['ORF_ID']
+        rgi_hits['Original ID'] = rgi_hits['Contig'].apply(lambda x: '_'.join(x.split('_')[:-1]))
     elif database == 'megares':
-        rgi_hits['Original ID'] = rgi_hits['ORF_ID']
+        rgi_hits['Original ID'] = rgi_hits['Contig'].apply(lambda x: '_'.join(x.split('_')[:-1]))
     # homolog models only for now
     rgi_hits = rgi_hits[rgi_hits['Model_type'] == "protein homolog model"]
-
 
     # tidy up "ORF ID"
     mapping = rgi_hits[['Original ID', "Best_Hit_ARO", 'ARO']]

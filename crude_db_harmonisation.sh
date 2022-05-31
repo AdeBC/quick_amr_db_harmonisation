@@ -65,7 +65,7 @@ python reconcile.py -f dbs/megares.fna -r mapping/megares_rgi.txt -d megares
 # Maybe post-process sarg output
 
 # tidy up
-mv *_ARO_mapping.tsv mapping
+mv {megares,ncbi,resfinder,argannot,sarg,deeparg,resfinderfg}_ARO_mapping.tsv mapping
 
 # combine outputs
 awk -F $'\t' 'NR == 1 || FNR > 1'  mapping/*_ARO_mapping.tsv > resfinder_ncbi_sarg_resfinderfg_deeparg_ARO_mapping.tsv
