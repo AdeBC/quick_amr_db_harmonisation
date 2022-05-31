@@ -3,7 +3,7 @@
 We need a quick way to compare results between different AMR databases
 While there are better ideas of dealing with this problem more robustly 
 (...speak to me about genomically-informed nomenclature normalisation),
-for mapping AMR databases (NCBI AMR, ResFinder, SARG, DeepARG) to CARD's ARO:
+for mapping AMR databases (NCBI AMR, ResFinder, SARG, DeepARG, MEGARes, ARG-ANNOT) to CARD's ARO:
 
 - Download these AMR databases
 
@@ -22,16 +22,18 @@ conda activate crude_harmonisation
 bash crude_db_harmonisation.sh
 ```
 
-Output mapping can be found at `resfinder_ncbi_sarg_deeparg_ARO_mapping.tsv`
+Output mapping can be found at `resfinder_ncbi_sarg_deeparg_megares_argannot_ARO_mapping.tsv`
 
 ## Statistics
 
 Proportion of genes mapped for each database.
 
 ```python
+argannot        0.996
 deeparg         0.976
-ncbi            0.968
-resfinder       0.978
+megares         0.950
+ncbi            0.969
+resfinder       0.976
 resfinder_fg    0.983
 sarg            0.978
 ```
